@@ -19,9 +19,9 @@
   ],
   "scripts": {
     "start": "ncc build src/index.ts --watch",
-    "build": "ncc build --minify --no-cache --no-source-map-register src/index.ts",
+    "build": "ncc build --minify src/index.ts && pnpm postbuild",
     "postbuild": "ts-node ./scripts/postbuild.ts",
-    "pub": "pnpm build && pnpm postbuild && release-it"
+    "pub": "release-it"
   },
   "devDependencies": {
     "@rollup/pluginutils": "^4.2.1",
