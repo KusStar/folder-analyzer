@@ -7,7 +7,16 @@
 - Just use `npx` to execute
 
 ```sh
-npx folder-analyzer [any folder]
+npx folder-analyzer <any folder> [options]
+```
+
+```sh
+Usage:
+  $ folder-analyzer <command> [options]
+
+Options:
+  --watch     Watch for changes (default: false)
+  -h, --help  Display this message 
 ```
 
 - Or use it in your project, see [Install](#install)
@@ -27,15 +36,19 @@ pnpm add folder-analyzer
 ```js
 const { start } = require('folder-analyzer')
 
-start('https://github.com/KusStar/gkd', './folder-analyzer')
+start('./folder-analyzer', {
+  watch: true
+})
 ```
 
 ### ES6
 
 ```js
-import { download, downloadWithCheck } from 'folder-analyzer'
+import { start } from 'folder-analyzer'
 
-downloadWithCheck('https://github.com/KusStar/folder-analyzer', './folder-analyzer')
+start('./folder-analyzer', {
+  watch: true
+})
 ```
 
 ## License
