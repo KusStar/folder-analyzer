@@ -9,11 +9,18 @@
   "license": "MIT",
   "author": "KusStar",
   "main": "dist/index.js",
+  "typings": "types/index.d.ts",
   "bin": {
-    "folder-analyzer": "dist/bin.js"
+    "folder-analyzer": "bin.js"
   },
+  "files": [
+    "dist",
+    "types"
+  ],
   "scripts": {
-    "build": "ncc build src/index.ts --minify --no-cache --no-source-map-register"
+    "types": "tsc",
+    "build": "ncc build src/index.ts --minify --no-cache --no-source-map-register",
+    "pub": "pnpm tsc && pnpm build && release-it"
   },
   "devDependencies": {
     "@types/node": "^18.0.0",
@@ -22,6 +29,7 @@
     "chokidar": "^3.5.3",
     "debug": "^4.3.4",
     "lodash.debounce": "^4.0.8",
+    "release-it": "^15.1.1",
     "rimraf": "^3.0.2",
     "ts-node": "^10.8.1",
     "tslib": "^2.4.0",
