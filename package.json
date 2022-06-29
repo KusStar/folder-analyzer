@@ -1,6 +1,6 @@
 {
   "name": "folder-analyzer",
-  "version": "2.3.1",
+  "version": "2.4.0",
   "description": "Folder analyzer, based on webpack bundle analyzer",
   "keywords": [
     "fodler-analyzer",
