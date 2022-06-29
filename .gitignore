@@ -1,3 +1,5 @@
 node_modules
 dist
 types
+test-files
+.DS_Store

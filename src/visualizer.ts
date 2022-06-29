@@ -5,6 +5,7 @@ import { start as startServer } from 'webpack-bundle-analyzer'
 import { BundleStats } from './bundleStats'
 import debounce from 'lodash.debounce'
 import { cwd, log } from './utils'
+import { analyzeApk } from './apk'
 
 export const start = async (input: string | undefined, options: Record<string, any>) => {
   if (!input) {
@@ -14,7 +15,16 @@ export const start = async (input: string | undefined, options: Record<string, a
   const { watch = false } = options
 
   const bundleStats = new BundleStats()
-  const entry = join(cwd, input)
+  let entry = join(cwd, input)
+  let title = basename(entry)
+
+  if (entry.endsWith('.apk') && fs.statSync(entry).isFile()) {
+    const { outDir, ratio } = await analyzeApk(entry)
+    title = basename(entry)
+    entry = outDir
+    bundleStats.ratio = ratio
+  }
+
   const entryBase = basename(entry)
 
   const read = (readPath) => {
@@ -33,7 +43,7 @@ export const start = async (input: string | undefined, options: Record<string, a
   }
 
   bundleStats.setInfo({
-    name: basename(entry) + '.js',
+    name: title,
     size: bundleStats.totalSize
   })
 
@@ -41,13 +51,13 @@ export const start = async (input: string | undefined, options: Record<string, a
     let firstLoaded = false
 
     const { updateChartData } = await startServer(bundleStats.statsJSON, {
-      reportTitle: basename(entry) + ' - Folder Analyzer',
+      reportTitle: title + ' - Folder Analyzer',
     })
     const update = () => {
       bundleStats.clean()
       read(entry)
       bundleStats.setInfo({
-        name: basename(entry) + '.js',
+        name: title,
         size: bundleStats.totalSize
       })
       updateChartData(bundleStats.statsJSON)
@@ -69,11 +79,11 @@ export const start = async (input: string | undefined, options: Record<string, a
     read(entry)
     log('> Collected bundleStats.json')
     bundleStats.setInfo({
-      name: basename(entry) + '.js',
+      name: title,
       size: bundleStats.totalSize
     })
     startServer(bundleStats.statsJSON, {
-      reportTitle: basename(entry) + ' - Folder Analyzer',
+      reportTitle: title + ' - Folder Analyzer',
     })
   }
 }
