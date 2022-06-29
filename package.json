@@ -9,7 +9,7 @@
   "license": "MIT",
   "author": "KusStar",
   "main": "dist/index.js",
-  "typings": "types/index.d.ts",
+  "typings": "dist/types/index.d.ts",
   "bin": {
     "folder-analyzer": "bin.js"
   },
@@ -18,9 +18,8 @@
     "types"
   ],
   "scripts": {
-    "types": "tsc",
     "build": "ncc build src/index.ts --minify --no-cache --no-source-map-register",
-    "pub": "pnpm tsc && pnpm build && release-it"
+    "pub": "pnpm build && release-it"
   },
   "devDependencies": {
     "@types/node": "^18.0.0",
