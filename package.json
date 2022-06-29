@@ -21,7 +21,7 @@
     "start": "ncc build src/index.ts --watch",
     "build": "ncc build --minify src/index.ts && pnpm postbuild",
     "postbuild": "ts-node ./scripts/postbuild.ts",
-    "pub": "release-it"
+    "pub": "npm run build && release-it"
   },
   "devDependencies": {
     "@rollup/pluginutils": "^4.2.1",
