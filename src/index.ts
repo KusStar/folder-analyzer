@@ -1,7 +1,12 @@
 import cac from 'cac'
 
-import { start } from './visualizer'
+import { start } from './analyzer'
 import { log } from './utils'
+
+export type CliArgs = {
+  watch: boolean
+  exclude: string
+}
 
 export const startCli = () => {
   const cli = cac('folder-analyzer')
@@ -9,6 +14,9 @@ export const startCli = () => {
   cli
     .option('--watch', 'Watch for changes', {
       default: false
+    })
+    .option('--exclude', 'Exclude files or folders', {
+      default: 'node_modules/**, .git/**'
     })
     .help()
 
@@ -23,7 +31,7 @@ export const startCli = () => {
 
   const input = parsed.args[0]
 
-  start(input, parsed.options)
+  start(input, parsed.options as CliArgs)
 }
 
 export { start }

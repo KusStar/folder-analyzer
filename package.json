@@ -23,6 +23,7 @@
     "pub": "pnpm build && release-it"
   },
   "devDependencies": {
+    "@rollup/pluginutils": "^4.2.1",
     "@types/extract-zip": "^2.0.1",
     "@types/node": "^18.0.0",
     "@vercel/ncc": "^0.34.0",
