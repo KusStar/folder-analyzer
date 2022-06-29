@@ -11,12 +11,15 @@ npx folder-analyzer <any folder> [options]
 ```
 
 ```sh
+folder-analyzer
+
 Usage:
   $ folder-analyzer <command> [options]
 
 Options:
   --watch     Watch for changes (default: false)
-  -h, --help  Display this message 
+  --exclude   Exclude files or folders (default: node_modules/**, .git/**)
+  -h, --help  Display this message
 ```
 
 - Or use it in your project, see [Install](#install)
