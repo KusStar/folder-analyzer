@@ -19,9 +19,9 @@
   ],
   "scripts": {
     "start": "ncc build src/index.ts --watch",
-    "build": "ncc build --minify src/index.ts && pnpm postbuild",
-    "postbuild": "ts-node ./scripts/postbuild.ts",
-    "pub": "release-it"
+    "build": "ncc build --minify src/index.ts && npm run removemap",
+    "removemap": "ts-node ./scripts/postbuild.ts",
+    "release": "release-it"
   },
   "devDependencies": {
     "@rollup/pluginutils": "^4.2.1",
